@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { storeExcelData, getStoredExcelData } from '../../service/upload';
 
 const router = Router();
-
+console.log('test server',);
 // Upload Excel file
 router.post('/data', async (req, res) => {
     try {
@@ -19,6 +19,7 @@ router.post('/data', async (req, res) => {
 
 router.get('/data', async (req, res) => {
     try {
+        console.log('test server= ',);
         const data = await getStoredExcelData();
         res.status(200).json(data);
     } catch (error) {

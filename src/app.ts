@@ -5,11 +5,11 @@ import express, { Request, Response } from "express";
 import cors from "cors";
 import connectDB from "./config/db";
 import routes from "./routes";
+const morgan = require('morgan');
 
 const app = express();
-const PORT = 3001;
 
-
+app.use(morgan('dev'));
 app.use(express.json());
 app.use(cors({
   origin: '*',
@@ -23,13 +23,10 @@ connectDB();
 
 // Hook the routes
 app.use('/api', routes);
-
+console.log('calling app ts final ff ');
 // Sample route
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello World!");
 });
 
-// Start server
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+module.exports = app;
