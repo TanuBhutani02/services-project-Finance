@@ -61,20 +61,35 @@ const DetailSchema: Schema = new Schema({
   status: {type: String},
 });
 
+const BillingInput: Schema = new Schema({
+  empid: {type: String},
+  name: {type: String},
+  billing_status: {type: String},
+  hrs_Per_Day: {type: Number},
+  rate: {type: Number},
+  max_hours_billable : {type: Number},
+  actual_hours_billable: {type: Number},
+  max_hours_shadow: {type: Number},
+  actual_hours_shadow : {type: Number},
+  multi_billing_account: {type: Number},
+  account_cost_factor: {type: Number},
+  status: {type: String},
+})
+
 const BillingSchema: Schema = new Schema({
   project: { type: String },
   month: { type: String   },
   year: { type: String },
-  total_revenue : {type: Number},
-  total_revenue_gap: {type : Number},
-  billing_Utilization : {type: Number},
-  overall_Utilization: {type: Number},
-  total_max_hours_shadow :{type:Number},
-  total_actual_hours_billable:{type:Number},
-  total_cost_to_account : {type: Number},
-  gross_Margin_Percent:  {type: Number},
-  gross_Margin: {type: Number},
-  details: [DetailSchema],
+  // total_revenue : {type: Number},
+  // total_revenue_gap: {type : Number},
+  // billing_Utilization : {type: Number},
+  // overall_Utilization: {type: Number},
+  // total_max_hours_shadow :{type:Number},
+  // total_actual_hours_billable:{type:Number},
+  // total_cost_to_account : {type: Number},
+  // gross_Margin_Percent:  {type: Number},
+ // gross_Margin: {type: Number},
+  details: [BillingInput],
 },{collection:'billing'});
 
 BillingSchema.index({project:1, month: 1, year: 1 }, { unique: true });

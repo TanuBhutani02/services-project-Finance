@@ -3,6 +3,9 @@ import { BaseController } from "./BaseController";
 import { EmployeeService } from "../../service/employee";
 
 class EmployeeController extends BaseController {
+  get(req: Request, res: Response): void {
+    throw new Error("Method not implemented.");
+  }
     private employeeService = new EmployeeService();
 
     constructor(){
@@ -13,14 +16,25 @@ class EmployeeController extends BaseController {
         this.update = this.update.bind(this);
         this.remove = this.remove.bind(this);
         this.create = this.create.bind(this);
+        this.getEmployeeDetail = this.getEmployeeDetail.bind(this);
       }
 
-  get(req: Request, res: Response): void {
-      throw new Error("Method not implemented.");
+  async getEmployeeDetail(req: Request, res: Response): Promise<any> {
+    try{
+      console.log("req.params #########################################",req.params);
+    const userId = req.params.id;
+    console.log("userId",userId);
+    const data =  await this.employeeService.getEmployeeById(userId);
+    this.handleSuccess(res,data);
+    }catch(err){
+      this.handleError(res,err);
+    }
+
   }
   async getAll(req: Request, res: Response): Promise<void> {
     try{
       const data =  await this.employeeService.getEmployeeDetails();
+      console.log("data",data);
        this.handleSuccess(res,data);
     }catch(err){
         this.handleError(res,err);
@@ -33,8 +47,10 @@ class EmployeeController extends BaseController {
   remove(req: Request, res: Response): void {
       throw new Error("Method not implemented.");
   }
-  create(req: Request, res: Response): void {
-     this.employeeService.storeEmployeeData(req.body);
+  async create(req: Request, res: Response): Promise<void> {
+    console.log("req.body employees",req.body);
+     await this.employeeService.storeEmployeeData(req.body);
+     this.handleSuccess(res);
   }
  
 }

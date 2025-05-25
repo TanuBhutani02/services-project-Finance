@@ -20,7 +20,7 @@ app.use(cors({
 
 // Connect to MongoDB
 connectDB();
-
+app.use(express.urlencoded({ extended: true })); 
 // Hook the routes
 app.use('/api', routes);
 console.log('calling app ts final ff ');

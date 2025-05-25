@@ -9,6 +9,7 @@ class BillingController extends BaseController {
 
     constructor() {
         super();
+        debugger;
         this.billingService = new BillingService();
         this.getAll = this.getAll.bind(this);
         this.update = this.update.bind(this);
@@ -16,6 +17,8 @@ class BillingController extends BaseController {
         this.create = this.create.bind(this);
         this.remove = this.remove.bind(this);
         this.filterProjects = this.filterProjects.bind(this);
+        debugger;
+        console.log("BillingController constructor ####");
        
     }
  public  async getAll(req: Request, res: Response): Promise<any> {
@@ -27,8 +30,10 @@ class BillingController extends BaseController {
    public update(req: Request, res: Response): void {
         throw new Error("Method not implemented.");
     }
+   
   public  async filterProjects(req: Request, res: Response): Promise<void> {
     try{
+        console.log("filterProjects",req.body);
        const data = await this.billingService.getBilling(req.body);
         this.handleSuccess(res, data);
   }catch(err){
